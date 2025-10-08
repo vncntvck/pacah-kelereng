@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Peraturan — Pacah Kelereng</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+    
+    :root {
+      --bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --card: #ffffff;
+      --accent: #f093fb;
+      --text: #2d3748;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      text-align: center;
+      max-width: 700px;
+      width: 100%;
+    }
+    
+    h1 {
+      font-size: 48px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 12px;
+      text-shadow: 2px 4px 8px rgba(0,0,0,0.2);
+      letter-spacing: -0.5px;
+    }
+    
+    .subtitle {
+      color: rgba(255,255,255,0.9);
+      font-size: 18px;
+      margin-bottom: 40px;
+      font-weight: 400;
+    }
+    
+    .btn-show {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      border: none;
+      padding: 18px 48px;
+      font-size: 20px;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(240, 147, 251, 0.4);
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .btn-show:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(240, 147, 251, 0.6);
+    }
+    
+    .btn-show:active {
+      transform: translateY(-1px);
+    }
+    
+    .rules-container {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease;
+      margin-top: 40px;
+    }
+    
+    .rules-container.show {
+      max-height: 3500px;
+    }
+    
+    .rules-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      text-align: left;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.5s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .rules-container.show .rules-card {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .rules-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+    }
+    
+    .card-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    
+    .rule-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      align-items: flex-start;
+    }
+    
+    .rule-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .rule-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+    
+    .rule-content {
+      flex: 1;
+      padding-top: 4px;
+    }
+    
+    .rule-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .rule-icon {
+      font-size: 20px;
+    }
+    
+    .rule-text {
+      color: #4a5568;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    
+    .btn-close {
+      margin-top: 30px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 2px solid white;
+      padding: 12px 36px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      backdrop-filter: blur(10px);
+    }
+    
+    .btn-close:hover {
+      background: white;
+      color: #667eea;
+    }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 36px;
+      }
+      
+      .rules-card {
+        padding: 30px 20px;
+      }
+      
+      .card-title {
+        font-size: 24px;
+      }
+      
+      .btn-show {
+        padding: 16px 36px;
+        font-size: 18px;
+      }
+      
+      .rule-item {
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 Pacah Kelereng</h1>
+    <p class="subtitle">Permainan Tradisional Penuh Strategi</p>
+    
+    <button class="btn-show" id="btnShow">Lihat Peraturan</button>
+    
+    <div class="rules-container" id="rulesContainer">
+      <div class="rules-card">
+        <div class="card-title">📜 Peraturan Permainan</div>
+        
+        <div class="rule-item">
+          <div class="rule-number">1</div>
+          <div class="rule-content">
+            <div class="rule-title"><span class="rule-icon">✊</span>Suit Pembuka</div>
+            <div class="rule-text">PEMAIN MELAKUKAN SUIT TERLEBIH DAHULU</div>
+          </div>
+        </div>
+        
+        <div class="rule-item">
+          <div class="rule-number">2</div>
+          <div class="rule-content">
+            <div class="rule-title"><span class="rule-icon">🎯</span>Hak Pemenang</div>
+            <div class="rule-text">Pemenang suit bebas memilih peran: <strong>membangun</strong> struktur atau <strong>menembak</strong> untuk menjatuhkan tabung.</div>
+          </div>
+        </div>
+        
+        <div class="rule-item">
+          <div class="rule-number">3</div>
+          <div class="rule-content">
+            <div class="rule-title"><span class="rule-icon">🎲</span>Kocok Dadu Pertama</div>
+            <div class="rule-text">Pemain yang membangun wajib mengocok dadu terlebih dahulu untuk menentukan jumlah balok yang akan digunakan.</div>
+          </div>
+        </div>
+        
+        <div class="rule-item">
+          <div class="rule-number">4</div>
+          <div class="rule-content">
+            <div class="rule-title"><span class="rule-icon">🔁</span>Giliran Penembak</div>
+            <div class="rule-text">PEMAIN YANG MENEMBAK HARUS MENGOCOK DADU SETELAH PEMAIN YANG MEMBANGUN SUDAH SELESAI MEMBANGUN</div>
+          </div>
+        </div>
+        
+        <div class="rule-item">
+          <div class="rule-number">5</div>
+          <div class="rule-content">
+            <div class="rule-title"><span class="rule-icon">🧱</span>Jumlah Balok</div>
+            <div class="rule-text"> PEMAIN YANG MEMBANGUN, MENGGUNAKAN BALOK SESUAI DENGAN ANGKA DADU YANG DIKOCOK</div>
+          </div>
+        </div>
+        
+        <div class="rule-item">
+          <div class="rule-number">6</div>
+          <div class="rule-content">
+            <div class="rule-title"><span class="rule-icon">📍</span>Zona Kreatif</div>
+            <div class="rule-text">PEMAIN YANG MEMBANGUN, BEBAS MENEMPATKAN BALOK SESUAI DENGAN TEMPAT YANG DITENTUKAN</div>
+          </div>
+        </div>
+        
+        <div class="rule-item">
+          <div class="rule-number">7</div>
+          <div class="rule-content">
+            <div class="rule-title"><span class="rule-icon">🏗️</span>Struktur Tabung</div>
+            <div class="rule-text"> PEMAIN YANG MEMBANGUN, BEBAS MEMBANGUN TABUNG SEKREATIF MUNGKIN DI DALAM AREA PERLINDUNGAN BALOK</div>
+          </div>
+        </div>
+        
+        <div class="rule-item">
+          <div class="rule-number">8</div>
+          <div class="rule-content">
+            <div class="rule-title"><span class="rule-icon">📏</span>Jarak Tembak</div>
+            <div class="rule-text">POSISI PEMAIN YANG MENEMBAK DITENTUKAN DARI DADU YANG DIKOCOK</div>
+          </div>
+        </div>
+        
+        <div class="rule-item">
+          <div class="rule-number">9</div>
+          <div class="rule-content">
+            <div class="rule-title"><span class="rule-icon">🔫</span>Tiga Kesempatan</div>
+            <div class="rule-text">Setiap penembak memiliki 3 kesempatan untuk melempar kelereng atau peluru mainan ke arah tabung.</div>
+          </div>
+        </div>
+        
+        <div class="rule-item">
+          <div class="rule-number">10</div>
+          <div class="rule-content">
+            <div class="rule-title"><span class="rule-icon">💥</span>Sistem Poin</div>
+            <div class="rule-text">Satu tabung yang roboh = 1 poin. Contoh: 5 tabung roboh = 5 poin untuk penembak.</div>
+          </div>
+        </div>
+        
+        <div class="rule-item">
+          <div class="rule-number">11</div>
+          <div class="rule-content">
+            <div class="rule-title"><span class="rule-icon">🔄</span>Rotasi Peran</div>
+            <div class="rule-text">Setelah ronde selesai, pemain bertukar peran agar semua mendapat kesempatan membanding poin. Ulangi dari awal.</div>
+          </div>
+        </div>
+        
+        <div class="rule-item">
+          <div class="rule-number">12</div>
+          <div class="rule-content">
+            <div class="rule-title"><span class="rule-icon">🏆</span>Juara</div>
+            <div class="rule-text">Pemain dengan total poin tertinggi setelah semua sesi perbandingan diumumkan sebagai pemenang permainan.</div>
+          </div>
+        </div>
+      </div>
+      
+      <button class="btn-close" id="btnClose">Tutup Peraturan</button>
+    </div>
+  </div>
+
+  <script>
+    const btnShow = document.getElementById('btnShow');
+    const btnClose = document.getElementById('btnClose');
+    const rulesContainer = document.getElementById('rulesContainer');
+    
+    btnShow.addEventListener('click', () => {
+      rulesContainer.classList.add('show');
+      btnShow.style.display = 'none';
+    });
+    
+    btnClose.addEventListener('click', () => {
+      rulesContainer.classList.remove('show');
+      setTimeout(() => {
+        btnShow.style.display = 'inline-block';
+      }, 300);
+    });
+  </script>
+</body>
+</html>
